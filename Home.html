@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Linux Tool Parameter</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Text:</h2>
+        <input type="text" id="text-input" class="input-text" placeholder="Enter text here">
+        <button onclick="sendToBackend()" class="btn-submit">Submit</button>
+    </div>
+
+    <script>
+        function sendToBackend() {
+            var text = document.getElementById("text-input").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/send", true);
+            xhr.setRequestHeader("Content-Type", "text/plain");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert('Text sent to the backend successfully!');
+                    } else {
+                        alert('Error sending text to the backend.');
+                    }
+                }
+            };
+            xhr.send(text);
+        }
+    </script>
+</body>
+</html>
